@@ -1,0 +1,18 @@
+# Investigation 13 - Counterexample for "add a 3rd LOAD unit"
+# 12 uops. Only 2 LOADs, but a 3-deep IMUL chain (single IMUL unit) gates them.
+# Adding a 3rd LOAD unit cannot help: loads wait on IMUL, not on LOAD ports.
+
+C00 IMUL R01, R00, R01
+C01 IMUL R02, R01, R01
+C02 IMUL R03, R02, R01
+
+C03 LOAD R10, [R03 + 0]
+C04 LOAD R11, [R03 + 4]
+
+C05 ADD  R04, R10, R11
+C06 ADD  R05, R04, R10
+C07 ADD  R06, R05, R11
+C08 ADD  R07, R06, R04
+C09 ADD  R08, R07, R05
+C10 ADD  R09, R08, R06
+C11 ADD  R12, R09, R07

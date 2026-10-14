@@ -1,0 +1,34 @@
+# Investigation 4 - Version B: More Independent
+# 20 uops. Same op mix as dep_heavy. 6 independent roots, max depth 3.
+
+B00 ADD  R01, R00, R00
+B01 ADD  R02, R01, R00
+
+B02 ADD  R03, R00, R01
+B03 ADD  R04, R03, R00
+
+B04 ADD  R05, R00, R00
+
+B05 LOAD R10, [R00 + 0]
+B06 LOAD R11, [R10 + 0]
+
+B07 LOAD R12, [R01 + 0]
+B08 LOAD R13, [R12 + 0]
+
+B09 LOAD R14, [R02 + 0]
+
+B10 FMUL F10, F02, F03
+B11 FADD F11, F10, F04
+
+B12 FMUL F12, F05, F06
+B13 FADD F13, F12, F07
+
+B14 STORE [R03 + 0], R05
+
+B15 IMUL R06, R04, R00
+B16 ADD  R07, R06, R05
+
+B17 BRANCH R07, 0
+
+B18 IMUL R08, R03, R01
+B19 ADD  R09, R08, R00
